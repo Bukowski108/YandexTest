@@ -1,14 +1,7 @@
 package qwe.framework;
 
-import org.apache.log4j.PropertyConfigurator;
-import org.openqa.selenium.WebElement;
-import sun.rmi.runtime.Log;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
-import java.util.logging.Level;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.WebElement;
 
 public class BaseTest {
 
