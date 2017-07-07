@@ -1,10 +1,7 @@
 package qwe.framework;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import qwe.Constans;
 import qwe.pages.DraftPage;
 import qwe.pages.LetterPage;
 import qwe.pages.LoginPage;
@@ -12,18 +9,11 @@ import qwe.pages.MainPage;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.concurrent.TimeUnit;
 
 public class Steps extends BaseTest {
 
-    public static WebDriver driver;
-
 
     protected void login(String user, String password) {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get(Constans.BASE_URL);
 
         LoginPage loginPage = new LoginPage(driver);
         sendKeys(loginPage.loginField, user, "Введите логин");
@@ -31,11 +21,9 @@ public class Steps extends BaseTest {
         click(loginPage.loginButton, "Логин");
 
         MainPage mainPage = new MainPage(driver);
-        new WebDriverWait(driver, 10).until(
-
+        new WebDriverWait(driver, 5).until(
                 ExpectedConditions.elementToBeClickable(mainPage.writeMsg)
         );
-
 
     }
 
@@ -46,17 +34,13 @@ public class Steps extends BaseTest {
             LetterPage letterPage = new LetterPage(driver);
             click(mainPage.writeMsg, "Написать");
             click(letterPage.address, "Кому");
-            Thread.sleep(500);
             sendKeys(letterPage.address, address, "Кому");
             Robot robot = new Robot();
             robot.keyPress(KeyEvent.VK_ENTER);
             click(letterPage.theme, "Тема письма");
-            Thread.sleep(500);
             sendKeys(letterPage.theme, theme, "Тема письма");
-            Thread.sleep(500);
             click(letterPage.message, "Поле для ввода письма");
             sendKeys(letterPage.message, message, "Поле для ввода письма");
-            Thread.sleep(1000);
         } catch (AWTException e) {
             e.printStackTrace();
         }
@@ -68,14 +52,40 @@ public class Steps extends BaseTest {
 
         click(letterPage.draftButton, "Черновики");
 
-        if (letterPage.saveChanges.isDisplayed()) {
-            click(letterPage.saveChanges, "Сохранить и перейти");
-        }
+        click(letterPage.saveChanges, "Сохранить и перейти");
 
+        new WebDriverWait(driver, 5).until(
+                ExpectedConditions.elementToBeClickable(draftPage.messageButton)
+        );
         click(draftPage.messageButton, "Черновое письмо");
+
         click(draftPage.sendMessage, "Отправить");
-        Thread.sleep(3000);
-        driver.close();
+        click(letterPage.sentButton, "Отправленные");
+
+        driver.navigate().refresh();
+         new WebDriverWait(driver, 5).until(
+               ExpectedConditions.elementToBeClickable(letterPage.draftButton)
+        );
+
+
+        click(letterPage.draftButton, "Черновики");
+
+        new WebDriverWait(driver, 5).until(
+                ExpectedConditions.elementToBeClickable(draftPage.backToMain)
+        );
+
+
+    }
+
+    protected void logout() throws InterruptedException {
+        DraftPage draftPage = new DraftPage(driver);
+        MainPage mainPage = new MainPage(driver);
+        click(draftPage.backToMain,"Вернуться во входящие");
+        click(mainPage.avatar,"Профиль пользователя");
+        new WebDriverWait(driver, 5).until(
+                ExpectedConditions.elementToBeClickable(mainPage.logout)
+        );
+        click(mainPage.logout,"Выйти");
 
     }
 

@@ -11,8 +11,11 @@ public class DraftPage {
     @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[2]/div[3]/div/div[2]/div[3]/div[2]/div[5]/div[1]/div/div/div[2]/div/div/div/div/div/a")
     public WebElement messageButton;
 
-    @FindBy(xpath = "//*[@id=\"nb-32\"]")
+    @FindBy(xpath = "//*[text()='Отправить']")
     public WebElement sendMessage;
+
+    @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[2]/div[3]/div/div[2]/div[3]/div[2]/div[5]/div[1]/div/div/div[3]/div/div/div/div[2]/a")
+    public WebElement backToMain;
 
 
     public DraftPage(WebDriver driver) {

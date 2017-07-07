@@ -3,20 +3,26 @@ package qwe;
 
 import org.testng.annotations.Test;
 import qwe.framework.Steps;
+import qwe.pages.DraftPage;
+import qwe.pages.MainPage;
 
 import java.awt.*;
+
+import static org.testng.Assert.assertEquals;
 
 
 public class MatrixBoard extends Steps {
 
 
     @Test(priority = 0)
-    public void first() throws InterruptedException {
+    public void login() throws InterruptedException {
         login("testforpflb", "testforpflb108");
+        MainPage mainPage = new MainPage(driver);
+        assertEquals(mainPage.writeMsg.isDisplayed(),true);
     }
 
 
-    @Test(dependsOnMethods = {"first"}, priority = 1)
+    @Test(dependsOnMethods = {"login"}, priority = 1)
 
     public void letsWriteAMessageTest() throws InterruptedException, AWTException {
         write("testforpflb@yandex.ru", "Someone","Sweet dreams are made of this\n" +
@@ -28,11 +34,21 @@ public class MatrixBoard extends Steps {
     }
 
 
-    @Test(dependsOnMethods = {"first"}, priority = 2)
+    @Test(dependsOnMethods = {"login","letsWriteAMessageTest"}, priority = 2)
 
     public void CheckDraftsTest() throws InterruptedException {
         check();
+        DraftPage draftPage = new DraftPage(driver);
+        assertEquals(draftPage.backToMain.isDisplayed(),true);
+    }
 
+    @Test(dependsOnMethods = {"login","letsWriteAMessageTest","CheckDraftsTest"}, priority = 3)
+
+    public void logoutTest() throws InterruptedException {
+        logout();
+        MainPage mainPage = new MainPage(driver);
+        assertEquals(mainPage.maps.isDisplayed(),true);
+        driver.close();
     }
 
 

@@ -8,14 +8,15 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
 
-    @FindBy(css = "#nb-1")
+    @FindBy(id = "nb-1")
     public WebElement loginField;
 
-    @FindBy(css = "#nb-6")
+    @FindBy(id = "nb-6")
     public WebElement passwordField;
 
-    @FindBy(xpath = "//*[@id=\"js\"]/body/div[1]/div[1]/div[1]/form/div[4]/span/button")
+    @FindBy(xpath = "//*[@class=' nb-button _nb-action-button nb-group-start']")
     public WebElement loginButton;
+
 
     public LoginPage(WebDriver driver) {
         PageFactory.initElements(driver, this);

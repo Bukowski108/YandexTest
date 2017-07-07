@@ -17,8 +17,11 @@ public class LetterPage {
     @FindBy(xpath = "//*[@id=\"cke_1_contents\"]/div")
     public WebElement message;
 
-    @FindBy(xpath= "//*[@id=\"nb-1\"]/body/div[2]/div[3]/div/div[2]/div[2]/div[2]/div/div[1]/a[5]")
+    @FindBy(xpath= "//*[text()='Черновики']")
     public WebElement draftButton;
+
+    @FindBy(xpath= "//*[text()='Отправленные']")
+    public WebElement sentButton;
 
     @FindBy(xpath = "//*[@id=\"nb-21\"]/div/div[2]/button[1]")
     public WebElement saveChanges;
