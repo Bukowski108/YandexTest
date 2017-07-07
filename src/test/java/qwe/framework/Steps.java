@@ -1,5 +1,6 @@
 package qwe.framework;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -7,7 +8,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import qwe.Constans;
 import qwe.pages.LoginPage;
-
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyEvent;
 import java.util.concurrent.TimeUnit;
 
 public class Steps extends BaseTest {
@@ -24,32 +28,53 @@ public class Steps extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         sendKeys(loginPage.loginField, user, "Введите логин");
         sendKeys(loginPage.passwordField, password, "Введите пароль");
-        click(loginPage.loginButton, "Залогиниться");
+        click(loginPage.loginButton, "Логин");
 
         new WebDriverWait(driver, 10).until(
-                ExpectedConditions.elementToBeClickable(loginPage.addPerson)
+                ExpectedConditions.elementToBeClickable(loginPage.writeMsg)
         );
 
 
     }
 
 
-    protected void createPerson(String firstName, String lastName) throws InterruptedException {
+    protected void write(String address, String theme, String message ) throws InterruptedException, AWTException {
+        try {
         LoginPage loginPage = new LoginPage(driver);
-        click(loginPage.addPerson, "Добавить пользователя");
-        click(loginPage.lastName, "Фамилия");
-        sendKeys(loginPage.lastName, lastName, "Введите фамилию");
-        click(loginPage.firstName, "Имя");
-        sendKeys(loginPage.firstName, firstName, "Введите имя");
-        click(loginPage.ready, "Готово");
-        Thread.sleep(3000);
+        click(loginPage.writeMsg, "Написать");
+        click(loginPage.address, "Кому");
+        Thread.sleep(500);
+        sendKeys(loginPage.address, address, "Кому");
+        Robot robot = new Robot();
+        robot.keyPress(KeyEvent.VK_ENTER);
+        click(loginPage.theme, "Тема письма");
+        Thread.sleep(500);
+        sendKeys(loginPage.theme, theme, "Тема письма");
+        Thread.sleep(500);
+        click(loginPage.message, "Поле для ввода письма");
+        sendKeys(loginPage.message, message, "Поле для ввода письма");
+        Thread.sleep(1000);
+        } catch (AWTException e) {
+
+            e.printStackTrace();
+
+        }
     }
 
-
-    protected void logout() throws InterruptedException {
+    protected void check() throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);
-        click(loginPage.logoutButton, "Выйти");
+
+        click(loginPage.draftButton, "Черновики");
+
+        if ( loginPage.saveChanges.isDisplayed()) {
+            click(loginPage.saveChanges, "Сохранить и перейти");
+        }
+
+        click(loginPage.messageButton, "Черновое письмо");
+        click(loginPage.sendMessage, "Отправить");
         Thread.sleep(3000);
         driver.close();
+
     }
+
 }
