@@ -25,7 +25,7 @@ public class MatrixBoard extends Steps {
     @Test(dependsOnMethods = {"login"}, priority = 1)
 
     public void letsWriteAMessageTest() throws InterruptedException, AWTException {
-        write("testforpflb@yandex.ru", "Someone","Sweet dreams are made of this\n" +
+        write("testforpflb@yandex.ru", "Some theme","Sweet dreams are made of this\n" +
                 "Who am I to disagree?\n" +
                 "I travel the world\n" +
                 "And the seven seas,\n" +

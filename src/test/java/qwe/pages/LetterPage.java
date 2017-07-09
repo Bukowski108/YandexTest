@@ -8,13 +8,13 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LetterPage {
 
-    @FindBy(xpath="//*[@id=\"nb-1\"]/body/div[2]/div[3]/div/div[2]/div[3]/div[2]/div[5]/div/div[1]/div[2]/div[1]/div/div[1]/label/div[3]/div")
+    @FindBy(xpath="//*[@class='js-compose-field mail-Bubbles mail-Bubbles-Sms_hidden'][1]")
     public WebElement address;
 
-    @FindBy(xpath="//*[@id=\"nb-1\"]/body/div[2]/div[3]/div/div[2]/div[3]/div[2]/div[5]/div/div[1]/div[2]/div[1]/div/label/div[3]/input")
+    @FindBy(xpath="//*[@class='mail-Compose-Field-Input-Controller js-compose-field js-editor-tabfocus-prev']")
     public WebElement theme;
 
-    @FindBy(xpath = "//*[@id=\"cke_1_contents\"]/div")
+    @FindBy(xpath = "//*[@class='cke_wysiwyg_div cke_reset cke_enable_context_menu cke_editable cke_editable_themed cke_contents_ltr cke_show_borders']")
     public WebElement message;
 
     @FindBy(xpath= "//*[text()='Черновики']")
@@ -23,7 +23,7 @@ public class LetterPage {
     @FindBy(xpath= "//*[text()='Отправленные']")
     public WebElement sentButton;
 
-    @FindBy(xpath = "//*[@id=\"nb-21\"]/div/div[2]/button[1]")
+    @FindBy(xpath = "//*[@class=' nb-button _nb-small-action-button _init nb-with-s-right-gap js-resolve']")
     public WebElement saveChanges;
 
     public LetterPage(WebDriver driver) {

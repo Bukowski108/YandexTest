@@ -8,13 +8,13 @@ import org.openqa.selenium.support.PageFactory;
 
 public class DraftPage {
 
-    @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[2]/div[3]/div/div[2]/div[3]/div[2]/div[5]/div[1]/div/div/div[2]/div/div/div/div/div/a")
+    @FindBy(xpath = "//*[@class='mail-MessageSnippet js-message-snippet toggles-svgicon-on-important toggles-svgicon-on-unread']")
     public WebElement messageButton;
 
-    @FindBy(xpath = "//*[text()='Отправить']")
+    @FindBy(xpath = "//*[@class='nb-button _nb-large-action-button _init js-editor-tabfocus-next js-send nb-group-start ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only']")
     public WebElement sendMessage;
 
-    @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[2]/div[3]/div/div[2]/div[3]/div[2]/div[5]/div[1]/div/div/div[3]/div/div/div/div[2]/a")
+    @FindBy(xpath = "//*[@class='b-messages__placeholder-item__link']")
     public WebElement backToMain;
 
 

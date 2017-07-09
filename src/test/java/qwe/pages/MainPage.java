@@ -8,10 +8,10 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MainPage {
 
-    @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[2]/div[3]/div/div[1]/div[3]/div/div/a")
+    @FindBy(xpath = "//*[@class='mail-ComposeButton js-left-col-toolbar-compose']")
     public WebElement writeMsg;
 
-    @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[2]/div[3]/div/div[1]/div[4]/div[5]/div[2]")
+    @FindBy(xpath = "//*[@class='mail-User-Picture js-user-picture']")
     public WebElement avatar;
 
     @FindBy(xpath = "//*[text()='Выход']")

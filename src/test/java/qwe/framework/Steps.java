@@ -33,6 +33,9 @@ public class Steps extends BaseTest {
             MainPage mainPage = new MainPage(driver);
             LetterPage letterPage = new LetterPage(driver);
             click(mainPage.writeMsg, "Написать");
+            new WebDriverWait(driver, 5).until(
+                    ExpectedConditions.elementToBeClickable(letterPage.address)
+            );
             click(letterPage.address, "Кому");
             sendKeys(letterPage.address, address, "Кому");
             Robot robot = new Robot();
@@ -52,7 +55,10 @@ public class Steps extends BaseTest {
 
         click(letterPage.draftButton, "Черновики");
 
-        click(letterPage.saveChanges, "Сохранить и перейти");
+        if (letterPage.saveChanges.isDisplayed()){
+            click(letterPage.saveChanges, "Сохранить и перейти");
+        }
+
 
         new WebDriverWait(driver, 5).until(
                 ExpectedConditions.elementToBeClickable(draftPage.messageButton)
@@ -64,7 +70,7 @@ public class Steps extends BaseTest {
 
         driver.navigate().refresh();
          new WebDriverWait(driver, 5).until(
-               ExpectedConditions.elementToBeClickable(letterPage.draftButton)
+                ExpectedConditions.elementToBeClickable(letterPage.draftButton)
         );
 
 
